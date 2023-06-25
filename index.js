@@ -1,18 +1,17 @@
 const http = require("http");
 const express = require("express");
 const app = express();
-const feedbackRoute = require("./route/utils/feedback");
+const path = require("path");
+const pages = require("./route/utils/page.js");
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(feedbackRoute);
+app.use("/", pages);
 
 app.use("/services", (req, res, next) => {
   res.send("services");
   next();
 });
 
-app.use("/", (req, res, next) => {
-  console.log("Home");
-});
 // const server = http.createServer((req, res) => {
 //   res.setHeader("Content-Type", "text/HTML");
 //   res.write("<h2>Hello OIC</h2>");
